@@ -3,11 +3,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const MoodEntry = (props) => {
+const MoodEntry = ({ mood, thoughts }) => {
     return (
         <div>
-            <h3>{props.mood}</h3>
-            <p>{props.thoughts}</p>
+            <h3>{mood}</h3>
+            <p>{thoughts}</p>
         </div>
     );
 }
