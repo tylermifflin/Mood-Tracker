@@ -1,4 +1,5 @@
 import React,{ useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const MoodForm = () => {
     const [mood, setMood] = useState('');
@@ -23,3 +24,13 @@ const MoodForm = () => {
                     <option value="balanced">Balanced</option>
                 </select>
             </label>
+            <label>
+                Thoughts:
+                <textarea value={thoughts} onChange={(e) => setThoughts(e.target.value)} />
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+    );
+};
+
+export default MoodForm;
