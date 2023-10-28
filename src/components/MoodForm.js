@@ -22,6 +22,8 @@ const MoodForm = () => {
                     <option value="angry">Angry</option>
                     <option value="anxious">Anxious</option>
                     <option value="balanced">Balanced</option>
+                    <option value="energetic">Energetic</option>
+                    <option value="tired">Tired</option>
                 </select>
             </label>
             <label>
