@@ -1,9 +1,24 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const MoodForm = () => {
     const [mood, setMood] = useState('');
     const [thoughts, setThoughts] = useState('');
+
+    useEffect(() => {
+        const previousMood = localStorage.getItem('mood');
+        const previousThoughts = localStorage.getItem('thoughts');
+
+        if (previousMood) {
+            setMood(previousMood);
+        }
+
+        if (previousThoughts) {
+            setThoughts(previousThoughts);
+        }
+    }
+    , []);
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
