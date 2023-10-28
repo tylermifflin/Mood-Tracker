@@ -4,30 +4,32 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const MoodForm = () => {
     const [mood, setMood] = useState('');
     const [thoughts, setThoughts] = useState('');
+    const [moodHistory, setMoodHistory] = useState([]);
 
     useEffect(() => {
-        const previousMood = localStorage.getItem('mood');
-        const previousThoughts = localStorage.getItem('thoughts');
+        const previousMoodHistory = JSON.parse(localStorage.getItem('moodHistory'));
 
-        if (previousMood) {
-            setMood(previousMood);
-        }
-
-        if (previousThoughts) {
-            setThoughts(previousThoughts);
+        if (previousMoodHistory) {
+            setMoodHistory(previousMoodHistory);
         }
     }
     , []);
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        localStorage.setItem('mood', mood);
-        localStorage.setItem('thoughts', thoughts);
+        const newEntry = { mood, thoughts };
+        const newMoodHistory = [...moodHistory, newEntry];
+        setMoodHistory(newMoodHistory);
+
+        localStorage.setItem('moodHistory', JSON.stringify(newMoodHistory));
+        setMood('');
+        setThoughts('');
     };
 
     return (
+        <div>
         <form onSubmit = {handleSubmit}>
             <label>
                 Mood:
@@ -46,7 +48,19 @@ const MoodForm = () => {
                 <textarea value={thoughts} onChange={(e) => setThoughts(e.target.value)} />
             </label>
             <button type="submit">Submit</button>
-        </form>
+            </form>
+
+            <div>
+       <h2>Mood History</h2>
+         <ul>
+              {moodHistory.map((entry, index) => (
+                 <li key={index}>
+                <strong>{entry.mood}</strong> - {entry.thoughts}
+                 </li>
+                ))}
+            </ul>
+        </div>
+        </div>
     );
 };
 
